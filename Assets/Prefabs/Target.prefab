@@ -112,4 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotSpeed: 1
   speed: 1
-  Hp: 50
+  Hp: 10
+  item: {fileID: 6771052771336101433, guid: 90f39e4392f0a2f4e9cce323f04ee58e, type: 3}

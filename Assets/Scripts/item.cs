@@ -17,20 +17,23 @@ public class item : MonoBehaviour
 
     private void Start()
     {
-        //startPos = transform;
+        GameObject obj = GameObject.FindGameObjectWithTag("Player");
+        startPos = this.transform;
+       
         lineRenderer = GetComponent<LineRenderer>();
+        playerPos = obj.transform;
     }
 
     private void Update()
     {
+        
         for (int i = 0; i < lineRenderer.positionCount; i++)
         {
             Vector3 point = Vector3.Slerp(startPos.position, playerPos.position, i / (float)(lineRenderer.positionCount - 1));
             lineRenderer.SetPosition(i, point) ;
         }
-       
-
-        //transform.position = Vector3.Slerp(startPos.position, playerPos.position, t);
+        transform.position = Vector3.Slerp(startPos.position, playerPos.position, t);
+        t = Time.deltaTime;
     }
 
 
