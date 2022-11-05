@@ -14,4 +14,29 @@ public class SpwnaManager : MonoBehaviour
 
     public GameObject targetPrefab; //Å¸°ÙÇÁ¸®ÆÕ³Ö±â
 
+    private void Update()
+    {
+        Spwan();
+    }
+
+    void Spwan()
+    {
+        currentTime += Time.deltaTime;
+
+        if (spwanCount <= 0)
+        {
+            currentTime = 0;
+            return;
+        }
+
+        if (currentTime >= spwanTime && spwanCount > 0)
+        {
+            int ran = Random.Range(0, 3);
+
+            currentTime = 0;
+            Instantiate(targetPrefab, spwanPonit[ran].transform.position, Quaternion.identity);
+
+            spwanCount--;
+        }
+    }
 }

@@ -12,6 +12,8 @@ public class Target : MonoBehaviour
 
     public int Hp;
 
+    public GameObject item;
+
     SpriteRenderer sprite;
     MeshRenderer mesh;
 
@@ -25,38 +27,37 @@ public class Target : MonoBehaviour
     {
         Move();
         Rotate(rotSpeed);
-       
+
     }
 
     void Move()
     {
-        transform.position += Vector3.back * speed * Time.deltaTime ;
+        transform.position += Vector3.back * speed * Time.deltaTime;
     }
 
     void Rotate(int rotSpeed)
     {
-        transform.Rotate(rotSpeed, 0, 0);
+        transform.Rotate(-rotSpeed, 0, 0);
     }
 
     public void Damage(int damege)
     {
         Hp -= damege;
         StartCoroutine(Sprite());
-        if (Hp < 0)
+        if (Hp <= 0)
             die();
     }
 
     void die()
     {
-        if(Hp < 0)
-        {
-            Destroy(gameObject);
-        }
+        Instantiate(item, gameObject.transform.position, Quaternion.identity);
+
+        Destroy(gameObject, 0.5f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Bullet"))
+        if (other.gameObject.CompareTag("Bullet"))
         {
             Bullet bullet = other.gameObject.GetComponent<Bullet>();
             Damage(bullet.power);
